@@ -281,7 +281,7 @@ def start_cycle(target, worker, live) :
 
 def main():
     global target_list_objs
-    targets = "01145239250"
+    targets = "01022875485"
 
     options = ["sms"]
     target_list = targets.split(",")
