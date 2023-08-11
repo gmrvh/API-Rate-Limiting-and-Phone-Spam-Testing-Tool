@@ -1,7 +1,7 @@
 [
   {
     "workerName": "YallaMotor",
-    "workerMode": "SMS",
+    "workerMode": "CALL",
     "workerType": "GET",
     "workerDPC": "60",
     "workerDPB": "600",
@@ -10,7 +10,8 @@
     "workerURL": "https://egypt.yallamotor.com/verify-twilio/911959",
     "workerBypassMethod": "none",
     "workerStatus": "100",
-    "workerIsActive": "True",
+    "workerIsActive": "False",
+    
     "workerPrefix": "",
     "workerHeader": {
       "User-Agent": "#userAgent",
@@ -36,11 +37,13 @@
     "workerSuccessText": {
       "status_code": "200",
       "status_text": "You will receive an automatic call"
-    }
+    },
+    "google_token" : "0",
+    "seleniumBypass" : "0"
   },
   {
     "workerName": "Dubizzle",
-    "workerMode": "SMS",
+    "workerMode": "CALL",
     "workerType": "POST",
     "workerDPC": "1",
     "workerDPB": "5",
@@ -49,25 +52,23 @@
     "workerURL": "https://auth.dubizzle.com.eg/auth/realms/olx-eg/passwordless-login/phone-number/generate-challenge",
     "workerBypassMethod": "",
     "workerStatus": "100",
-    "workerIsActive": "False",
+    "workerIsActive": "True",
     "workerPrefix": "+2",
     "workerHeader": {
       "Host":"auth.dubizzle.com.eg",
-      "User-Agent":"#userAgent",
+      "Sec-Ch-Ua": "",
       "Accept":"application/json",
-      "Cache-Control":"no-cache",
-      "Connection":"keep-alive",
-      "Accept-Language":"en-US,en;q=0.5",
-      "Accept-Encoding":"gzip, deflate, br",
-      "Content-Type":"application/json;",
-      "Cookie":"anonymous_session_id=c8984a4e-02d2-4a52-854e-50c9cb48aa23; device_id=lkg5eq3eqfeqgsr1l; settings=%7B%22area%22%3Anull%2C%22currency%22%3A%22EGP%22%2C%22installBanner%22%3Atrue%2C%22searchHitsLayout%22%3A%22LIST%22%7D; abTests=%7B%7D; banners=%7B%7D; userGeoLocation=%7B%22coordinates%22%3Anull%2C%22closestLocation%22%3Anull%2C%22loading%22%3Afalse%2C%22error%22%3Anull%7D; hb-session-id=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..PSy5BjinQ7vW8Vag.U3azQPd8YkPurDQEjyMqR_GAk-VQhTfsGpKAN7yTiwl33qBr7SomvJ8ORv-Sf4HIMZ…geY3vqc7On1qjheqKlLarAUAxOpg0Ys_gjPOKkLDzAVtxzi6BKaiA53tEWJaOdx2JI9VoIklMOHQOkejpfmjYkLyNgdKuiIreE.tGrlJOGhnSTYJuFgQB3Vuw; AWSALB=o8rKinlfvyA9z3HNK63IObDR54h0i8AjHdeM8BV1bziOjURHF2se+FPz+kW7Cr9ACURctmmLJUdukcWW1uOHAjzbfzpnh5c/DSGn1lNz9IReViskCQhjys2bjd7P; AWSALBCORS=o8rKinlfvyA9z3HNK63IObDR54h0i8AjHdeM8BV1bziOjURHF2se+FPz+kW7Cr9ACURctmmLJUdukcWW1uOHAjzbfzpnh5c/DSGn1lNz9IReViskCQhjys2bjd7P; referrer=https%3A%2F%2Fwww.dubizzle.com.eg%2F; original_referrer=https%3A%2F%2Fwww.dubizzle.com.eg%2F; landing_url=%2F",
+      "Content-Type":"application/json",
+      "Sec-Ch-Ua-Mobile":"?0",
+      "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+      "Sec-Ch-Ua-Platform":"",
       "Origin":"https://www.dubizzle.com.eg",
-      "Pragma":"no-cache",
-      "Referer":"https://www.dubizzle.com.eg/",
-      "Sec-Fetch-Dest":"empty",
-      "Sec-Fetch-Mode":"no-cors",
       "Sec-Fetch-Site":"same-site",
-      "TE":"trailers"
+      "Sec-Fetch-Mode":"cors",
+      "Sec-Fetch-Dest":"empty",
+      "Referer":"https://www.dubizzle.com.eg/",
+      "Accept-Encoding":"gzip, deflate",
+      "Accept-Language":"en-US,en;q=0.9"
     },
     "workerParameters": {
       "client_id":"frontend",
@@ -77,7 +78,9 @@
     },
     "workerSuccessText": {
       "status_code": "200",
-      "status_text": ""
-    }
+      "status_text": "Token"
+    },
+    "google_token" : "6LdijU4iAAAAAPS5LzPDrsUYaessDfxTIPLzqRDh",
+    "seleniumBypass" : "https://www.dubizzle.com.eg/.humbucker/challenge/js/validate"
   }
 ]

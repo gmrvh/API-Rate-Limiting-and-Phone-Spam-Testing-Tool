@@ -1,0 +1,51 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
+from selenium.webdriver.support import expected_conditions as EC # available since 2.26.0
+from rich import print
+
+
+import requests
+from twocaptcha import TwoCaptcha
+from requests import Request, Session
+from bs4 import BeautifulSoup
+from seleniumwire import webdriver  
+from seleniumwire.undetected_chromedriver.v2 import Chrome, ChromeOptions
+from selenium.webdriver.support.ui import WebDriverWait
+import re
+import cloudscraper
+import chromedriver_autoinstaller 
+import time 
+import undetected_chromedriver as uc
+
+
+
+validate_url = "https://auth.dubizzle.com.eg/.humbucker/challenge/js/validate"
+payload = """
+[{"vendor":"Google Inc. (NVIDIA)","renderer":"ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER Direct3D11 vs_5_0 ps_5_0, D3D11)"},{"ogg":"probably","mp3":"probably","wav":"probably","m4a":"","aac":""},8,{"window":{"innerHeight":720,"outerHeight":814,"innerWidth":1655,"outerWidth":1671,"screenX":3449,"screenY":358,"pageXOffset":0,"pageYOffset":0,"devicePixelRation":1},"client":{"width":1638,"height":720},"screen":{"width":5120,"height":1440,"availWidth":5120,"availHeight":1400,"colorDepth":24,"pixelDepth":24}},["en-US","en"],"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.5790.171 Safari/537.36",null,33,["-application/pdf-pdf","Portable Document Format-application/x-google-chrome-pdf-pdf"],[{"deviceId":"","kind":"audioinput","label":"","groupId":""},{"deviceId":"","kind":"videoinput","label":"","groupId":""},{"deviceId":"","kind":"audiooutput","label":"","groupId":""}],{"__nightmare":false,"callPhantom":false,"_phantom":false,"phantom":false,"webdriver":false,"_Selenium_IDE_Recorder":false,"callSelenium":false,"_selenium":false,"__webdriver_script_fn":false,"__driver_evaluate":false,"__webdriver_evaluate":false,"__selenium_evaluate":false,"__fxdriver_evaluate":false,"__driver_unwrapped":false,"__webdriver_unwrapped":false,"__selenium_unwrapped":false,"__fxdriver_unwrapped":false,"__webdriver_script_func":false,"documentSelenium":false,"documentWebdriver":false,"documentDriver":false},{"ogg":"probably","h264":"","webm":"probably"},"function get width() { [native code] }","422808721",false,{"maxTouchPoints":0,"onTouchStart":false,"canHandleTouchEvents":false},{"vendorSub":"function get vendorSub() { [native code] }","productSub":"function get productSub() { [native code] }","vendor":"function get vendor() { [native code] }","maxTouchPoints":"function get maxTouchPoints() { [native code] }","scheduling":"function get scheduling() { [native code] }","userActivation":"function get userActivation() { [native code] }","doNotTrack":"function get doNotTrack() { [native code] }","geolocation":"function get geolocation() { [native code] }","connection":"function get connection() { [native code] }","plugins":"function get plugins() { [native code] }","mimeTypes":"function get mimeTypes() { [native code] }","pdfViewerEnabled":"function get pdfViewerEnabled() { [native code] }","webkitTemporaryStorage":"function get webkitTemporaryStorage() { [native code] }","webkitPersistentStorage":"function get webkitPersistentStorage() { [native code] }","hardwareConcurrency":"function get hardwareConcurrency() { [native code] }","cookieEnabled":"function get cookieEnabled() { [native code] }","appCodeName":"function get appCodeName() { [native code] }","appName":"function get appName() { [native code] }","appVersion":"function get appVersion() { [native code] }","platform":"function get platform() { [native code] }","product":"function get product() { [native code] }","userAgent":"function get userAgent() { [native code] }","language":"function get language() { [native code] }","languages":"function get languages() { [native code] }","onLine":"function get onLine() { [native code] }","webdriver":"function get webdriver() { [native code] }","getGamepads":"function getGamepads() { [native code] }","javaEnabled":"function javaEnabled() { [native code] }","sendBeacon":"function sendBeacon() { [native code] }","vibrate":"function vibrate() { [native code] }","constructor":"function Navigator() { [native code] }","bluetooth":"function get bluetooth() { [native code] }","clipboard":"function get clipboard() { [native code] }","credentials":"function get credentials() { [native code] }","keyboard":"function get keyboard() { [native code] }","managed":"function get managed() { [native code] }","mediaDevices":"function get mediaDevices() { [native code] }","storage":"function get storage() { [native code] }","serviceWorker":"function get serviceWorker() { [native code] }","virtualKeyboard":"function get virtualKeyboard() { [native code] }","wakeLock":"function get wakeLock() { [native code] }","deviceMemory":"function get deviceMemory() { [native code] }","ink":"function get ink() { [native code] }","hid":"function get hid() { [native code] }","locks":"function get locks() { [native code] }","mediaCapabilities":"function get mediaCapabilities() { [native code] }","mediaSession":"function get mediaSession() { [native code] }","serial":"function get serial() { [native code] }","gpu":"function get gpu() { [native code] }","usb":"function get usb() { [native code] }","windowControlsOverlay":"function get windowControlsOverlay() { [native code] }","xr":"function get xr() { [native code] }","userAgentData":"function get userAgentData() { [native code] }","canShare":"function canShare() { [native code] }","share":"function share() { [native code] }","clearAppBadge":"function clearAppBadge() { [native code] }","getBattery":"function getBattery() { [native code] }","getUserMedia":"function getUserMedia() { [native code] }","requestMIDIAccess":"function requestMIDIAccess() { [native code] }","requestMediaKeySystemAccess":"function requestMediaKeySystemAccess() { [native code] }","setAppBadge":"function setAppBadge() { [native code] }","webkitGetUserMedia":"function webkitGetUserMedia() { [native code] }","getInstalledRelatedApps":"function getInstalledRelatedApps() { [native code] }","registerProtocolHandler":"function registerProtocolHandler() { [native code] }","unregisterProtocolHandler":"function unregisterProtocolHandler() { [native code] }","adAuctionComponents":"function adAuctionComponents() { [native code] }","runAdAuction":"function runAdAuction() { [native code] }","canLoadAdAuctionFencedFrame":"function canLoadAdAuctionFencedFrame() { [native code] }","createAdRequest":"function createAdRequest() { [native code] }","finalizeAd":"function finalizeAd() { [native code] }","deprecatedReplaceInURN":"function deprecatedReplaceInURN() { [native code] }","deprecatedURNToURL":"function deprecatedURNToURL() { [native code] }","getInterestGroupAdAuctionData":"function getInterestGroupAdAuctionData() { [native code] }","joinAdInterestGroup":"function joinAdInterestGroup() { [native code] }","leaveAdInterestGroup":"function leaveAdInterestGroup() { [native code] }","updateAdInterestGroups":"function updateAdInterestGroups() { [native code] }"},"Win32"]
+"""
+
+header = {
+    "Host":"auth.dubizzle.com.eg",
+    "Cookie" : "device_id=lkvy73alut2lvehax; _gcl_au=1.1.935350283.1691114985; _gid=GA1.3.634968270.1691114986; _fbp=fb.2.1691114985962.1731778137; settings=%7B%22area%22%3Anull%2C%22currency%22%3A%22EGP%22%2C%22installBanner%22%3Atrue%2C%22searchHitsLayout%22%3A%22LIST%22%7D; abTests=%7B%7D; banners=%7B%7D; userGeoLocation=%7B%22coordinates%22%3Anull%2C%22closestLocation%22%3Anull%2C%22loading%22%3Afalse%2C%22error%22%3Anull%7D; anonymous_session_id=defe7d2c-99a1-4b04-a451-06c17f70d49b; moe_uuid=aa2266c2-ecc8-43a0-b663-fba4660964f8; hb-session-id=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..XpwjgSf6LJlXLpA9.MQu-J1vsIynncxhaF9J89DH6wx9qorViqj-LA8JUoP-jwDreHKY4JaQEGtZlUu-acuOQzytoZmMlipjUB1LfMRdYhrPBES_UdZadWRxWd1hgAnxm2c6WmAfJlT1zGtWRcJ0P6pmB6HAkT9vX6ZEZ4nLrzBjKSK8FyxQ9duS7DUoABnPgSDGQNEV1UY-3Yc0HVlFgwMB0K00S-Mbx4W76v9vs4NLDxW6azYHwOxQwfPCRkK5RJavatXxPQbuz8DnzshRi_CKQvslOlT7ffSFIpsmLvVmORajLB_m1b-uwRIL0BQmSg0SvZDc24wMW3Jiqi5cJAVOt_XB1Thc0wNjbbxOVwfpjkTIjcdjOmO-hwiYwD6NutEErMpdIyj6_RVH9Nt0.6q5DA-uTIYiHbXGgbUO1Pg; __gads=ID=5a26906078d7e72a:T=1691114986:RT=1691456323:S=ALNI_MasYpKSEhsSrShFQf74JS-p9UsiLA; __gpi=UID=00000c77986b25a4:T=1691114986:RT=1691456323:S=ALNI_MarZXvewpBEdbncixzEwdeRAJNhtg; _ga=GA1.3.1670793822.1691114985; _ga_547QBEKWP2=GS1.1.1691455539.14.1.1691456681.60.0.0; landing_url=%2F; _gat_UA-52442898-19=1",
+    "Sec-Ch-Ua": "",
+    "Accept":"application/json",
+    "Content-Type":"application/json",
+    "Sec-Ch-Ua-Mobile":"?0",
+    "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.5790.171 Safari/537.36",
+    "Sec-Ch-Ua-Platform":"",
+    "Origin":"https://www.dubizzle.com.eg",
+    "Sec-Fetch-Site":"same-site",
+    "X-Hb-Co" : "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..E332532NkBRTizAF.Vg04yLEd36tS1hvYt-tOT5_519uGbxpzQGmLnQk0vSzAPkQu6Qog2E0sajHK5z7FqJIwxK3BXKHPutyF5eDT5RlHx0WbZTIJeYB9aY2yFTSxa0Yc4t1CKpfghKg0QeBVktICHHFa1hjcLlONXz7FYEZyAKaoJ_EEovYw8SD4eUariz4obxCkbApAkM7HMwO3EMf557BlKDjb3JhVNRFSg7Om_7ewJAZOJCiWLRPylCmWHw5z6kofLfhtVvW4Lm9lon23i26Zk_7RXToe2kBs2vKGejfMWW8MTltl6kIFgHfk9TmsBey6Sd69CFjF69wTyOBWjI53wFikfXzyHFq-oUGMjfc785lrOhZLUNdgVR7s3RU4sHCyEJcBDTZHRsBp5hI1bLw7DNVHMct6Bt09ArWAcAg_rx__JYXwPumnGoBAixumWxaHdyY05MtVZFUBSSA_LQpuiCNJe6TwoV4y8ogADuJSB8u0TiV6ONDihTYoLOwoXcuo3Eb7RH0dFcL0z1SWnpxr3xxHZGmRtEoeRYzOSf4IlXYCctoKikl0fnJKkgHWJjRjEl29Ol1H3XQ19WHw75PIBrWlIx7EMVgsr4awU03A4umEEjfvvZaSmfUvj44PsfX9iVYoj0odkau67JgExa4aFHQDp68ChHfbv2HQj8tTaq9qvT828qbAc-S0jBeqh4lWM4bhLvaCf9nFoHwc1Ot09gM586FjcVsSmepVipA.oXXKCiOrJOn3wzgadV_5fg",
+    "Sec-Fetch-Mode":"cors",
+    "Sec-Fetch-Dest":"empty",
+    "Referer":"https://www.dubizzle.com.eg/",
+    "Accept-Encoding":"gzip, deflate",
+    "Accept-Language":"en-US,en;q=0.9"
+    }
+
+resp = requests.post(validate_url, data=payload, headers=header)
+print(resp.status_code)
+print(len(resp.raw.headers))
+session_id = resp.raw.headers.get('Set-Cookie').split(';')[0].split('=')[1]
+print(session_id)
